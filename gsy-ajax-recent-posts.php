@@ -2,11 +2,24 @@
 
 /*
  * Plugin Name: GSY Ajax Recent Posts
+ * Plugin URI: https://github.com/georgi-yankov/gsy-ajax-recent-posts
  * Description: A widget for ajax recent posts
  * Version: 1.0
  * Author: Georgi Yankov
  * Author URI: http://gsy-design.com
  */
+
+include_once 'class-garp-widget.php';
+
+/* =============================================================================
+  REGISTER GARP_Widget widget
+  =========================================================================== */
+
+add_action('widgets_init', 'garp_register_widget');
+
+function garp_register_widget() {
+    register_widget('GARP_Widget');
+}
 
 /* =============================================================================
   ADDING CSS AND JS
