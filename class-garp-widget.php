@@ -53,7 +53,7 @@ class GARP_Widget extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label> 
-            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>">
+            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
         </p>
         <?php
     }
@@ -79,23 +79,14 @@ class GARP_Widget extends WP_Widget {
      * @return void
      */
     private function ajax_posts() {
-        $query_args = array(
-            'post_type' => 'post',
-            'orderby' => 'date',
-            'order' => 'DESC',
-            'posts_per_page' => 2,
-            'post__not_in' => get_option('sticky_posts'),
-        );
-
-        // The Query
-        $the_query = new WP_Query($query_args);
+        require 'inc/the-query.php';
         ?>
 
         <?php if ($the_query->have_posts()) : ?>
 
             <ul>
                 <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-                    <li>
+                    <li data-garp-post-id="<?php the_ID(); ?>">
                         <a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a>
                         <span class="post-date"><?php echo the_time('F d, Y'); ?></span>
                     </li>
