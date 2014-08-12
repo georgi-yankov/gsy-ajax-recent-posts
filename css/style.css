@@ -1,0 +1,35 @@
+/*********************************************
+    WIDGET GARP_Widget
+*********************************************/
+.footer-icon, .widget.widget_garp_widget ul li span.post-date {
+  background-image: url("img/icons.png");
+  background-repeat: no-repeat;
+}
+
+.icon-date, .widget.widget_garp_widget ul li span.post-date {
+  background-position: 0 0;
+}
+
+.widget.widget_garp_widget ul li {
+  background: url("img/widget-middle-line.png") center bottom no-repeat;
+  padding: 8px 0;
+  text-align: right;
+}
+.widget.widget_garp_widget ul li:first-child {
+  padding-top: 0;
+}
+.widget.widget_garp_widget ul li a {
+  color: #fff;
+  display: block;
+  text-align: left;
+}
+.widget.widget_garp_widget ul li a:hover {
+  text-decoration: underline;
+}
+.widget.widget_garp_widget ul li span.post-date {
+  color: #424242;
+  display: inline-block;
+  font-size: 10px;
+  line-height: 10px;
+  padding: 0 0 0 14px;
+}

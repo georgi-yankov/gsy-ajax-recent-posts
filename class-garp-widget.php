@@ -11,8 +11,8 @@ class GARP_Widget extends WP_Widget {
     public function __construct() {
         parent::__construct(
                 'garp_widget', // Base ID
-                __('Widget Title', 'text_domain'), // Name
-                array('description' => __('A widget for ajax recent posts', 'text_domain'),) // Args
+                __('Ajax Recent Posts', 'text_domain'), // Name
+                array('description' => __('Your site’s most recent Posts with Ajax.', 'text_domain'),) // Args
         );
     }
 
@@ -31,7 +31,9 @@ class GARP_Widget extends WP_Widget {
         if (!empty($title)) {
             echo $args['before_title'] . $title . $args['after_title'];
         }
-        echo __('Hello, World!', 'text_domain');
+
+        self::ajax_posts();
+
         echo $args['after_widget'];
     }
 
@@ -69,6 +71,44 @@ class GARP_Widget extends WP_Widget {
         $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
 
         return $instance;
+    }
+
+    /**
+     * Generates the most recent posts with ajax
+     * 
+     * @return void
+     */
+    private function ajax_posts() {
+        $query_args = array(
+            'post_type' => 'post',
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'posts_per_page' => 2,
+            'post__not_in' => get_option('sticky_posts'),
+        );
+
+        // The Query
+        $the_query = new WP_Query($query_args);
+        ?>
+
+        <?php if ($the_query->have_posts()) : ?>
+
+            <ul>
+                <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+                    <li>
+                        <a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a>
+                        <span class="post-date"><?php echo the_time('F d, Y'); ?></span>
+                    </li>
+                <?php endwhile; ?>
+            </ul>
+
+        <?php else: ?>
+
+            <p><?php _e('Sorry, no posts to be shown.'); ?></p>
+
+        <?php endif; ?>
+        <?php
+        wp_reset_postdata();
     }
 
 }

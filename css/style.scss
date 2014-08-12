@@ -1,0 +1,47 @@
+/*********************************************
+    WIDGET GARP_Widget
+*********************************************/
+
+$secondary-dark-color: #424242;
+
+.footer-icon {
+    background-image: url("img/icons.png");
+    background-repeat: no-repeat;
+}
+
+.icon-date {
+    background-position: 0 0;
+}
+
+.widget.widget_garp_widget {
+    ul {
+        li {
+            background: url("img/widget-middle-line.png") center bottom no-repeat;
+            padding: 8px 0; 
+            text-align: right;
+            
+            &:first-child {
+                padding-top: 0;
+            }
+            
+            a {
+                color: #fff;
+                display: block;
+                text-align: left;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }  
+            
+            span.post-date {
+                @extend .footer-icon;
+                @extend .icon-date;
+                color: $secondary-dark-color;
+                display: inline-block;
+                font-size: 10px;
+                line-height: 10px;
+                padding: 0 0 0 14px;
+            }
+        }
+    }
+}
