@@ -105,11 +105,16 @@ function garp_myajax_func() {
  */
 function garp_generate_result($the_query) {
     $result = array();
-    $post_id = $the_query->posts[0]->ID;
 
-    if ($post_id === (int) $_POST['lastPublishedPostID']) {
+    $post_id = $the_query->posts[0]->ID;
+    $post_date = $the_query->posts[0]->post_date;
+
+    $last_published_post = get_post((int) $_POST['lastPublishedPostID']);
+    $last_published_post_date = $last_published_post->post_date;
+
+    if ($post_date === $last_published_post_date) {
         $result['refresh_widget'] = false;
-    } else if ($post_id > (int) $_POST['lastPublishedPostID']) {
+    } else if ($post_date > $last_published_post_date) {
         $post_title = $the_query->posts[0]->post_title;
         $post_guid = $the_query->posts[0]->guid;
         $post_date_array = date_parse($the_query->posts[0]->post_date);
@@ -125,7 +130,7 @@ function garp_generate_result($the_query) {
                 'date' => $post_date,
             )
         );
-    } else if ($post_id < (int) $_POST['lastPublishedPostID']) {
+    } else if ($post_date < $last_published_post_date) {
         $result = array(
             'refresh_widget' => true,
             'post_action' => 'remove',
