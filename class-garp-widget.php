@@ -28,6 +28,7 @@ class GARP_Widget extends WP_Widget {
         $title = apply_filters('widget_title', $instance['title']);
 
         echo $args['before_widget'];
+        
         if (!empty($title)) {
             echo $args['before_title'] . $title . $args['after_title'];
         }
@@ -87,8 +88,8 @@ class GARP_Widget extends WP_Widget {
             <ul>
                 <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                     <li data-garp-post-id="<?php the_ID(); ?>">
-                        <a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a>
-                        <span class="post-date"><?php echo the_time('F d, Y'); ?></span>
+                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        <span class="post-date"><?php the_time('F d, Y'); ?></span>
                     </li>
                 <?php endwhile; ?>
             </ul>

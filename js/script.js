@@ -1,8 +1,10 @@
 (function($) {
-    //"use strict";
+    "use strict";
 
     $(document).ready(function() {
-        setInterval(function() {
+        setInterval(setIntervalAjax, 2000);
+
+        function setIntervalAjax() {
             {
                 var widgetUL,
                         lastPublishedPost,
@@ -16,7 +18,7 @@
                         GARP_Ajax.ajaxurl,
                         {
                             // wp ajax action
-                            action: 'ajax-inputtitleSubmit',
+                            action: 'gsy-ajax-recent-posts',
                             // vars
                             lastPublishedPostID: lastPublishedPostID,
                             // send the nonce along with the request
@@ -42,7 +44,7 @@
                 );
                 return false;
             }
-        }, 2000);
+        }
     });
 
 })(jQuery);

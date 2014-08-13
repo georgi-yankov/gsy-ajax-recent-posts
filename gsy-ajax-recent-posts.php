@@ -38,25 +38,41 @@ function garp_adding_scripts() {
     wp_enqueue_script('garp-script', $script_src, array('jquery'));
     wp_localize_script('garp-script', 'GARP_Ajax', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
-        'nextNonce' => wp_create_nonce('myajax-next-nonce'))
+        'nextNonce' => wp_create_nonce('garp-myajax-next-nonce'))
     );
 }
 
 /* =============================================================================
-  AJAX TEST
+  AJAX
   =========================================================================== */
 
-add_action('wp_ajax_ajax-inputtitleSubmit', 'myajax_inputtitleSubmit_func');
-add_action('wp_ajax_nopriv_ajax-inputtitleSubmit', 'myajax_inputtitleSubmit_func');
+add_action('wp_ajax_gsy-ajax-recent-posts', 'garp_myajax_func');
+add_action('wp_ajax_nopriv_gsy-ajax-recent-posts', 'garp_myajax_func');
 
-function myajax_inputtitleSubmit_func() {
+function garp_myajax_func() {
 // check nonce
     $nonce = $_POST['nextNonce'];
-    if (!wp_verify_nonce($nonce, 'myajax-next-nonce'))
+    if (!wp_verify_nonce($nonce, 'garp-myajax-next-nonce')) {
         die('Busted!');
+    }
 
     require 'inc/the-query.php';
 
+    $result = generate_result($the_query);
+    
+// generate the response
+    $response = json_encode($result);
+
+// response output
+    header("Content-Type: application/json");
+    echo $response;
+
+// IMPORTANT: don't forget to "exit"
+    exit;
+}
+
+// generate the result
+function generate_result($the_query) {
     $result = array();
     $post_id = $the_query->posts[0]->ID;
 
@@ -65,7 +81,11 @@ function myajax_inputtitleSubmit_func() {
     } else if ($post_id > (int) $_POST['lastPublishedPostID']) {
         $post_title = $the_query->posts[0]->post_title;
         $post_guid = $the_query->posts[0]->guid;
-        $post_date = $the_query->posts[0]->post_date;
+
+        $post_date_array = date_parse($the_query->posts[0]->post_date);
+        $dateObj = DateTime::createFromFormat('!m', $post_date_array['month']);
+        $month_name = $dateObj->format('F');
+        $post_date = $month_name . ' ' . $post_date_array['day'] . ', ' . $post_date_array['year'];
 
         $result = array(
             'refresh_widget' => true,
@@ -86,14 +106,6 @@ function myajax_inputtitleSubmit_func() {
             )
         );
     }
-
-// generate the response
-    $response = json_encode($result);
-
-// response output
-    header("Content-Type: application/json");
-    echo $response;
-
-// IMPORTANT: don't forget to "exit"
-    exit;
+    
+    return $result;
 }
