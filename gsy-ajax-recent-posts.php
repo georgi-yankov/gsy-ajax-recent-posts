@@ -26,11 +26,23 @@ function garp_register_widget() {
   =========================================================================== */
 
 add_action('wp_enqueue_scripts', 'garp_adding_styles');
+add_action('admin_head', 'garp_adding_admin_styles');
 add_action('wp_enqueue_scripts', 'garp_adding_scripts');
 
+/**
+ * Adding styles for the front-end
+ */
 function garp_adding_styles() {
     $style_src = plugins_url('css/style.css', __FILE__);
     wp_enqueue_style('garp-style', $style_src);
+}
+
+/**
+ * Adding styles for the back-end
+ */
+function garp_adding_admin_styles() {
+    $style_src = plugins_url('admin/css/style.css', __FILE__);
+    wp_enqueue_style('garp-admin-style', $style_src);
 }
 
 function garp_adding_scripts() {
@@ -69,7 +81,7 @@ function garp_myajax_func() {
         'ignore_sticky_posts' => true
     );
 
-// The Query
+// the query
     $the_query = new WP_Query($query_args);
 
     $result = garp_generate_result($the_query);
@@ -85,7 +97,12 @@ function garp_myajax_func() {
     exit;
 }
 
-// generate the result
+/**
+ * Generates the result
+ * 
+ * @param type $the_query
+ * @return array
+ */
 function garp_generate_result($the_query) {
     $result = array();
     $post_id = $the_query->posts[0]->ID;
