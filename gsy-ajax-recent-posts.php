@@ -149,7 +149,7 @@ function garp_generate_result($the_query) {
  */
 function garp_posts_to_show() {
     $widget_garp_widget_options = get_option('widget_garp_widget');
-    $posts_to_show = $widget_garp_widget_options[2]['number'];
+    $posts_to_show = $widget_garp_widget_options[4]['number'];
 
     return $posts_to_show;
 }
@@ -160,7 +160,7 @@ function garp_posts_to_show() {
  */
 function garp_interval_time() {
     $widget_garp_widget_options = get_option('widget_garp_widget');
-    $interval_time = $widget_garp_widget_options[2]['interval'];
+    $interval_time = $widget_garp_widget_options[4]['interval'];
 
     return $interval_time;
 }
@@ -171,7 +171,7 @@ function garp_interval_time() {
  */
 function garp_show_date() {
     $widget_garp_widget_options = get_option('widget_garp_widget');
-    $show_date = $widget_garp_widget_options[2]['show_date'];
+    $show_date = $widget_garp_widget_options[4]['show_date'];
 
     return $show_date;
 }
