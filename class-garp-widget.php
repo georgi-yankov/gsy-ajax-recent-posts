@@ -27,8 +27,16 @@ class GARP_Widget extends WP_Widget {
     public function widget($args, $instance) {
         $title = apply_filters('widget_title', $instance['title']);
 
+        $number = (!empty($instance['number']) ) ? absint($instance['number']) : 5;
+        if (!$number)
+            $number = 5;
+        $this->posts_to_show = $number;
+
+        $show_date = isset($instance['show_date']) ? $instance['show_date'] : false;
+        $this->show_date = $show_date;
+
         echo $args['before_widget'];
-        
+
         if (!empty($title)) {
             echo $args['before_title'] . $title . $args['after_title'];
         }
@@ -46,15 +54,37 @@ class GARP_Widget extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form($instance) {
-        if (isset($instance['title'])) {
-            $title = $instance['title'];
-        } else {
-            $title = __('New title', 'text_domain');
-        }
+        $title = isset($instance['title']) ? esc_attr($instance['title']) : __('New title', 'text_domain');
+        $number = isset($instance['number']) ? absint($instance['number']) : 5;
+        $interval = isset($instance['interval']) ? absint($instance['interval']) : 3;
+        $show_date = isset($instance['show_date']) ? (bool) $instance['show_date'] : false;
         ?>
+
+        <style>
+            .garp-widget-label {
+                display: inline-block;
+                width: 40%;
+            }
+        </style>
+
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label> 
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
+        </p>
+
+        <p>
+            <label class="garp-widget-label" for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show:'); ?></label>
+            <input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+        </p>
+
+        <p>
+            <label class="garp-widget-label" for="<?php echo $this->get_field_id('interval'); ?>"><?php _e('Set interval time:'); ?></label>
+            <input id="<?php echo $this->get_field_id('interval'); ?>" name="<?php echo $this->get_field_name('interval'); ?>" type="text" value="<?php echo $interval; ?>" size="3" /> seconds
+        </p>
+
+        <p>
+            <input class="checkbox" type="checkbox" <?php checked($show_date); ?> id="<?php echo $this->get_field_id('show_date'); ?>" name="<?php echo $this->get_field_name('show_date'); ?>" />
+            <label for="<?php echo $this->get_field_id('show_date'); ?>"><?php _e('Display post date?'); ?></label>
         </p>
         <?php
     }
@@ -68,8 +98,11 @@ class GARP_Widget extends WP_Widget {
      * @return array Updated safe values to be saved.
      */
     public function update($new_instance, $old_instance) {
-        $instance = array();
+        $instance = $old_instance;
         $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
+        $instance['number'] = (int) $new_instance['number'];
+        $instance['interval'] = (int) $new_instance['interval'];
+        $instance['show_date'] = isset($new_instance['show_date']) ? (bool) $new_instance['show_date'] : false;
 
         return $instance;
     }
@@ -80,7 +113,17 @@ class GARP_Widget extends WP_Widget {
      * @return void
      */
     private function ajax_posts() {
-        require 'inc/the-query.php';
+        $query_args = array(
+            'post_type' => POST_TYPE,
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'posts_per_page' => $this->posts_to_show,
+            'post_status' => 'publish',
+            'ignore_sticky_posts' => IGNORE_STICKY_POSTS
+        );
+
+        // The Query
+        $the_query = new WP_Query($query_args);
         ?>
 
         <?php if ($the_query->have_posts()) : ?>
@@ -89,7 +132,7 @@ class GARP_Widget extends WP_Widget {
                 <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                     <li data-garp-post-id="<?php the_ID(); ?>">
                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                        <span class="post-date"><?php the_time('F d, Y'); ?></span>
+                        <?php echo ($this->show_date) ? '<span class="post-date">' . get_the_time('F d, Y') . '</span>' : '' ?>
                     </li>
                 <?php endwhile; ?>
             </ul>
@@ -102,5 +145,8 @@ class GARP_Widget extends WP_Widget {
         <?php
         wp_reset_postdata();
     }
+
+    private $posts_to_show;
+    private $show_date;
 
 }

@@ -40,8 +40,10 @@ function garp_adding_scripts() {
     wp_localize_script('garp-script', 'GARP_Ajax', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
         'nextNonce' => wp_create_nonce('garp-myajax-next-nonce'),
-        'intervalTime' => INTERVAL_TIME
-        )
+        'intervalTime' => garp_interval_time(),
+        'postsToShow' => garp_posts_to_show(),
+        'showDate' => garp_show_date()
+            )
     );
 }
 
@@ -59,10 +61,20 @@ function garp_myajax_func() {
         die('Busted!');
     }
 
-    require 'inc/the-query.php';
+    $query_args = array(
+        'post_type' => POST_TYPE,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'posts_per_page' => 1,
+        'post_status' => 'publish',
+        'ignore_sticky_posts' => IGNORE_STICKY_POSTS
+    );
 
-    $result = generate_result($the_query);
-    
+// The Query
+    $the_query = new WP_Query($query_args);
+
+    $result = garp_generate_result($the_query);
+
 // generate the response
     $response = json_encode($result);
 
@@ -75,7 +87,7 @@ function garp_myajax_func() {
 }
 
 // generate the result
-function generate_result($the_query) {
+function garp_generate_result($the_query) {
     $result = array();
     $post_id = $the_query->posts[0]->ID;
 
@@ -109,6 +121,39 @@ function generate_result($the_query) {
             )
         );
     }
-    
+
     return $result;
+}
+
+/**
+ * 
+ * @return int
+ */
+function garp_posts_to_show() {
+    $widget_garp_widget_options = get_option('widget_garp_widget');
+    $posts_to_show = $widget_garp_widget_options[2]['number'];
+
+    return $posts_to_show;
+}
+
+/**
+ * 
+ * @return int
+ */
+function garp_interval_time() {
+    $widget_garp_widget_options = get_option('widget_garp_widget');
+    $interval_time = $widget_garp_widget_options[2]['interval'];
+
+    return $interval_time;
+}
+
+/**
+ * 
+ * @return bool
+ */
+function garp_show_date() {
+    $widget_garp_widget_options = get_option('widget_garp_widget');
+    $show_date = $widget_garp_widget_options[2]['show_date'];
+
+    return $show_date;
 }

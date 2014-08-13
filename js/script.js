@@ -2,17 +2,26 @@
     "use strict";
 
     $(document).ready(function() {
-        setInterval(setIntervalAjax, GARP_Ajax.intervalTime);
+
+        setInterval(setIntervalAjax, (GARP_Ajax.intervalTime * 1000));
 
         function setIntervalAjax() {
             {
                 var widgetUL,
+                        countPosts,
                         lastPublishedPost,
-                        lastPublishedPostID;
+                        lastPublishedPostID,
+                        firstPublishedPost,
+                        firstPublishedPostID;
 
                 widgetUL = $('.widget_garp_widget ul');
+                countPosts = $('li', widgetUL).length;
+
                 lastPublishedPost = $('li:first-child', widgetUL);
                 lastPublishedPostID = lastPublishedPost.data('garp-post-id');
+
+                firstPublishedPost = $('li:last-child', widgetUL);
+                firstPublishedPostID = firstPublishedPost.data('garp-post-id');
 
                 $.post(
                         GARP_Ajax.ajaxurl,
@@ -29,11 +38,18 @@
 
                     if (response.refresh_widget) {
                         if (response.post_action === 'add') {
-                            html =
-                                    '<li data-garp-post-id="' + response.post_data.id + '">' +
-                                    '<a href="' + response.post_data.guid + '">' + response.post_data.title + '</a>' +
-                                    '<span class="post-date">' + response.post_data.date + '</span>' +
-                                    '</li>';
+                            if (countPosts >= GARP_Ajax.postsToShow) {
+                                $('li[data-garp-post-id="' + firstPublishedPostID + '"]').remove();
+                            }
+
+                            html = '<li data-garp-post-id="' + response.post_data.id + '">';
+                            html += '<a href="' + response.post_data.guid + '">' + response.post_data.title + '</a>';
+
+                            if (GARP_Ajax.showDate) {
+                                html += '<span class="post-date">' + response.post_data.date + '</span>';
+                            }
+
+                            html += '</li>';
 
                             widgetUL.prepend(html);
                         } else if (response.post_action === 'remove') {
