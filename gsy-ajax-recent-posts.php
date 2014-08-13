@@ -112,11 +112,8 @@ function garp_generate_result($the_query) {
     } else if ($post_id > (int) $_POST['lastPublishedPostID']) {
         $post_title = $the_query->posts[0]->post_title;
         $post_guid = $the_query->posts[0]->guid;
-
         $post_date_array = date_parse($the_query->posts[0]->post_date);
-        $dateObj = DateTime::createFromFormat('!m', $post_date_array['month']);
-        $month_name = $dateObj->format('F');
-        $post_date = $month_name . ' ' . $post_date_array['day'] . ', ' . $post_date_array['year'];
+        $post_date = date("F", mktime(0, 0, 0, $post_date_array['month'], 10)) . ' ' . $post_date_array['day'] . ', ' . $post_date_array['year'];
 
         $result = array(
             'refresh_widget' => true,
