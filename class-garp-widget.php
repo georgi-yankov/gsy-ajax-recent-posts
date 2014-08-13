@@ -114,12 +114,12 @@ class GARP_Widget extends WP_Widget {
      */
     private function ajax_posts() {
         $query_args = array(
-            'post_type' => POST_TYPE,
+            'post_type' => 'post',
             'orderby' => 'date',
             'order' => 'DESC',
             'posts_per_page' => $this->posts_to_show,
             'post_status' => 'publish',
-            'ignore_sticky_posts' => IGNORE_STICKY_POSTS
+            'ignore_sticky_posts' => true
         );
 
         // The Query

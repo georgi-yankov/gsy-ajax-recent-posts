@@ -9,7 +9,6 @@
  * Author URI: http://gsy-design.com
  */
 
-require_once 'config-garp-widget.php';
 require_once 'class-garp-widget.php';
 
 /* =============================================================================
@@ -62,12 +61,12 @@ function garp_myajax_func() {
     }
 
     $query_args = array(
-        'post_type' => POST_TYPE,
+        'post_type' => 'post',
         'orderby' => 'date',
         'order' => 'DESC',
         'posts_per_page' => 1,
         'post_status' => 'publish',
-        'ignore_sticky_posts' => IGNORE_STICKY_POSTS
+        'ignore_sticky_posts' => true
     );
 
 // The Query
