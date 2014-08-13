@@ -56,7 +56,7 @@ class GARP_Widget extends WP_Widget {
     public function form($instance) {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : __('New title', 'text_domain');
         $number = isset($instance['number']) ? absint($instance['number']) : 5;
-        $interval = isset($instance['interval']) ? absint($instance['interval']) : 3;
+        $interval = isset($instance['interval']) ? absint($instance['interval']) : 5;
         $show_date = isset($instance['show_date']) ? (bool) $instance['show_date'] : false;
         ?>
 
