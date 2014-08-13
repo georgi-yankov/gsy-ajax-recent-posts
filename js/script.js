@@ -2,7 +2,7 @@
     "use strict";
 
     $(document).ready(function() {
-        setInterval(setIntervalAjax, 2000);
+        setInterval(setIntervalAjax, GARP_Ajax.intervalTime);
 
         function setIntervalAjax() {
             {

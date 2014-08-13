@@ -9,7 +9,8 @@
  * Author URI: http://gsy-design.com
  */
 
-include_once 'class-garp-widget.php';
+require_once 'config-garp-widget.php';
+require_once 'class-garp-widget.php';
 
 /* =============================================================================
   REGISTER GARP_Widget widget
@@ -38,7 +39,9 @@ function garp_adding_scripts() {
     wp_enqueue_script('garp-script', $script_src, array('jquery'));
     wp_localize_script('garp-script', 'GARP_Ajax', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
-        'nextNonce' => wp_create_nonce('garp-myajax-next-nonce'))
+        'nextNonce' => wp_create_nonce('garp-myajax-next-nonce'),
+        'intervalTime' => INTERVAL_TIME
+        )
     );
 }
 

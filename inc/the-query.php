@@ -1,10 +1,10 @@
 <?php
 
 $query_args = array(
-    'post_type' => 'post',
+    'post_type' => POST_TYPE,
     'orderby' => 'date',
     'order' => 'DESC',
-    'posts_per_page' => 2,
+    'posts_per_page' => POSTS_PER_PAGE,
     'post__not_in' => get_option('sticky_posts'),
 );
 
