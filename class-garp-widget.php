@@ -143,6 +143,14 @@ if (!class_exists('GARP_Widget')) {
         private $posts_to_show;
         private $show_date;
 
+        /**
+         * Removes all plugin options
+         * @static
+         */
+        public static function plugin_deactivation() {
+            delete_option('widget_garp_widget');
+        }
+
     }
 
 }
