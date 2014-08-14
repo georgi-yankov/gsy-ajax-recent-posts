@@ -48,12 +48,17 @@ function garp_adding_admin_styles() {
 function garp_adding_scripts() {
     $script_src = plugins_url('js/script.js', __FILE__);
     wp_enqueue_script('garp-script', $script_src, array('jquery'));
+
+    // Get the plugin options
+    $widget_garp_widget_options = get_option('widget_garp_widget');
+    $first_element = reset($widget_garp_widget_options);
+
     wp_localize_script('garp-script', 'GARP_Ajax', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
         'nextNonce' => wp_create_nonce('garp-myajax-next-nonce'),
-        'intervalTime' => garp_interval_time(),
-        'postsToShow' => garp_posts_to_show(),
-        'showDate' => garp_show_date()
+        'intervalTime' => $first_element['interval'],
+        'postsToShow' => $first_element['number'],
+        'showDate' => $first_element['show_date'],
             )
     );
 }
@@ -141,40 +146,4 @@ function garp_generate_result($the_query) {
     }
 
     return $result;
-}
-
-/**
- * 
- * @return int
- */
-function garp_posts_to_show() {
-    $widget_garp_widget_options = get_option('widget_garp_widget');
-    $first_element = reset($widget_garp_widget_options);
-    $posts_to_show = $first_element['number'];
-
-    return $posts_to_show;
-}
-
-/**
- * 
- * @return int
- */
-function garp_interval_time() {
-    $widget_garp_widget_options = get_option('widget_garp_widget');
-    $first_element = reset($widget_garp_widget_options);
-    $interval_time = $first_element['interval'];
-
-    return $interval_time;
-}
-
-/**
- * 
- * @return bool
- */
-function garp_show_date() {
-    $widget_garp_widget_options = get_option('widget_garp_widget');
-    $first_element = reset($widget_garp_widget_options);
-    $show_date = $first_element['show_date'];
-
-    return $show_date;
 }
