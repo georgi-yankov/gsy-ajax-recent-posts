@@ -3,7 +3,7 @@
 /*
  * Plugin Name: GSY Ajax Recent Posts
  * Plugin URI: https://github.com/georgi-yankov/gsy-ajax-recent-posts
- * Description: A widget for ajax recent posts
+ * Description: This plugin adds a widget which is like the built-in 'Recent Posts'. The main and only difference is that the built-in one doesn't update posts dynamicly. The widget this plugin provides, works as simple as to check if there are newly published posts in certain interval of time, and add them dynamicly.
  * Version: 1.0
  * Author: Georgi Yankov
  * Author URI: http://gsy-design.com
