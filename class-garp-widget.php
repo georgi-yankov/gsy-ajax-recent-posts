@@ -144,11 +144,11 @@ if (!class_exists('GARP_Widget')) {
         private $show_date;
 
         /**
-         * Removes all plugin options
+         * Process on plugin deactivation
          * @static
          */
         public static function plugin_deactivation() {
-            delete_option('widget_garp_widget');
+            // do something
         }
 
     }
