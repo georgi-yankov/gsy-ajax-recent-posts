@@ -7,6 +7,7 @@
  * Version: 1.0
  * Author: Georgi Yankov
  * Author URI: http://gsy-design.com
+ * Text Domain: gsy-ajax-recent-posts
  * License: GPLv2
  */
 
@@ -37,6 +38,16 @@ add_action('widgets_init', 'garp_register_widget');
 
 function garp_register_widget() {
     register_widget('GARP_Widget');
+}
+
+/* =============================================================================
+  INTERNATIONALIZATION
+  =========================================================================== */
+
+add_action('init', 'garp_load_plugin_textdomain'); // or use 'admin_init' or 'plugins_loaded'
+
+function garp_load_plugin_textdomain() {
+    load_plugin_textdomain('gsy-ajax-recent-posts', false, plugin_basename(dirname(__FILE__) . '/localization/'));
 }
 
 /* =============================================================================

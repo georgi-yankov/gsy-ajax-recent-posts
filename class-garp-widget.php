@@ -12,8 +12,8 @@ if (!class_exists('GARP_Widget')) {
         public function __construct() {
             parent::__construct(
                     'garp_widget', // Base ID
-                    __('Ajax Recent Posts', 'text_domain'), // Name
-                    array('description' => __('Your site’s most recent Posts with Ajax.', 'text_domain'),) // Args
+                    __('Ajax Recent Posts', 'gsy-ajax-recent-posts'), // Name
+                    array('description' => __('Your site’s most recent Posts with Ajax.', 'gsy-ajax-recent-posts'),) // Args
             );
         }
 
@@ -55,30 +55,30 @@ if (!class_exists('GARP_Widget')) {
          * @param array $instance Previously saved values from database.
          */
         public function form($instance) {
-            $title = isset($instance['title']) ? esc_attr($instance['title']) : __('New title', 'text_domain');
+            $title = isset($instance['title']) ? esc_attr($instance['title']) : __('New title', 'gsy-ajax-recent-posts');
             $number = isset($instance['number']) ? absint($instance['number']) : 5;
             $interval = isset($instance['interval']) ? absint($instance['interval']) : 5;
             $show_date = isset($instance['show_date']) ? (bool) $instance['show_date'] : false;
             ?>
 
             <p>
-                <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label> 
+                <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'gsy-ajax-recent-posts'); ?></label> 
                 <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
             </p>
 
             <p>
-                <label class="garp-widget-label" for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show:'); ?></label>
+                <label class="garp-widget-label" for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show:', 'gsy-ajax-recent-posts'); ?></label>
                 <input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
             </p>
 
             <p>
-                <label class="garp-widget-label" for="<?php echo $this->get_field_id('interval'); ?>"><?php _e('Set interval time:'); ?></label>
-                <input id="<?php echo $this->get_field_id('interval'); ?>" name="<?php echo $this->get_field_name('interval'); ?>" type="text" value="<?php echo $interval; ?>" size="3" /> seconds
+                <label class="garp-widget-label" for="<?php echo $this->get_field_id('interval'); ?>"><?php _e('Set interval time:', 'gsy-ajax-recent-posts'); ?></label>
+                <input id="<?php echo $this->get_field_id('interval'); ?>" name="<?php echo $this->get_field_name('interval'); ?>" type="text" value="<?php echo $interval; ?>" size="3" /> <?php _e('seconds', 'gsy-ajax-recent-posts'); ?>
             </p>
 
             <p>
                 <input class="checkbox" type="checkbox" <?php checked($show_date); ?> id="<?php echo $this->get_field_id('show_date'); ?>" name="<?php echo $this->get_field_name('show_date'); ?>" />
-                <label for="<?php echo $this->get_field_id('show_date'); ?>"><?php _e('Display post date?'); ?></label>
+                <label for="<?php echo $this->get_field_id('show_date'); ?>"><?php _e('Display post date?', 'gsy-ajax-recent-posts'); ?></label>
             </p>
             <?php
         }
@@ -133,7 +133,7 @@ if (!class_exists('GARP_Widget')) {
 
             <?php else: ?>
 
-                <p><?php _e('Sorry, no posts to be shown.'); ?></p>
+                <p><?php _e('Sorry, no posts to be shown.', 'gsy-ajax-recent-posts'); ?></p>
 
             <?php endif; ?>
             <?php

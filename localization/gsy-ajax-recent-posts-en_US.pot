@@ -1,0 +1,53 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GSY Ajax Recent Posts\n"
+"POT-Creation-Date: 2014-08-16 01:26+0200\n"
+"PO-Revision-Date: 2014-08-16 01:32+0200\n"
+"Last-Translator: Georgi <georgi.s.yankov@abv.bg>\n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.7\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: class-garp-widget.php:15
+msgid "Ajax Recent Posts"
+msgstr ""
+
+#: class-garp-widget.php:16
+msgid "Your site’s most recent Posts with Ajax."
+msgstr ""
+
+#: class-garp-widget.php:58
+msgid "New title"
+msgstr ""
+
+#: class-garp-widget.php:65
+msgid "Title:"
+msgstr ""
+
+#: class-garp-widget.php:70
+msgid "Number of posts to show:"
+msgstr ""
+
+#: class-garp-widget.php:75
+msgid "Set interval time:"
+msgstr ""
+
+#: class-garp-widget.php:76
+msgid "seconds"
+msgstr ""
+
+#: class-garp-widget.php:81
+msgid "Display post date?"
+msgstr ""
+
+#: class-garp-widget.php:136
+msgid "Sorry, no posts to be shown."
+msgstr ""
