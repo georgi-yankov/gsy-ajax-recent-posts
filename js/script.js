@@ -38,22 +38,24 @@
 
                     if (response.refresh_widget) {
                         if (response.post_action === 'add') {
+                            
+                            html = '<li data-garp-post-id="' + response.post_data.id + '">';
+                            html += '<a href="' + response.post_data.guid + '">' + response.post_data.title + '</a>';
+                            if (GARP_Ajax.showDate) {
+                                html += '<span class="post-date">' + response.post_data.date + '</span>';
+                            }
+                            html += '</li>';
+
                             if (countPosts >= GARP_Ajax.postsToShow) {
                                 $('li[data-garp-post-id="' + firstPublishedPostID + '"]').remove();
                             }
 
-                            html = '<li data-garp-post-id="' + response.post_data.id + '">';
-                            html += '<a href="' + response.post_data.guid + '">' + response.post_data.title + '</a>';
+                            $(html).hide().prependTo(widgetUL).fadeIn("slow");
 
-                            if (GARP_Ajax.showDate) {
-                                html += '<span class="post-date">' + response.post_data.date + '</span>';
-                            }
-
-                            html += '</li>';
-
-                            widgetUL.prepend(html);
                         } else if (response.post_action === 'remove') {
-                            $('li[data-garp-post-id="' + lastPublishedPostID + '"]').remove();
+                            $('li[data-garp-post-id="' + lastPublishedPostID + '"]').fadeOut("slow", function() {
+                                $(this).remove();
+                            });
                         }
                     }
                 }
