@@ -1,33 +1,23 @@
 /*********************************************
     WIDGET GARP_Widget
 *********************************************/
-.footer-icon, .widget.widget_garp_widget ul li span.post-date {
+.footer-icon, .widget_garp_widget ul li span.post-date {
   background-image: url("img/icons.png");
   background-repeat: no-repeat;
 }
 
-.icon-date, .widget.widget_garp_widget ul li span.post-date {
+.icon-date, .widget_garp_widget ul li span.post-date {
   background-position: 0 0;
 }
 
-.widget.widget_garp_widget ul li {
-  background: url("img/widget-middle-line.png") center bottom no-repeat;
-  padding: 8px 0;
+.widget_garp_widget ul li {
   text-align: right;
 }
-.widget.widget_garp_widget ul li:first-child {
-  padding-top: 0;
-}
-.widget.widget_garp_widget ul li a {
-  color: #fff;
+.widget_garp_widget ul li a {
   display: block;
   text-align: left;
 }
-.widget.widget_garp_widget ul li a:hover {
-  text-decoration: underline;
-}
-.widget.widget_garp_widget ul li span.post-date {
-  color: #424242;
+.widget_garp_widget ul li span.post-date {
   display: inline-block;
   font-size: 10px;
   line-height: 10px;
