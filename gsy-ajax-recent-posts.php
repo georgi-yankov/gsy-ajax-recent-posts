@@ -61,7 +61,7 @@ register_deactivation_hook(__FILE__, array('GARP_Widget', 'plugin_deactivation')
   =========================================================================== */
 
 add_action('wp_enqueue_scripts', 'garp_adding_styles');
-add_action('admin_head', 'garp_adding_admin_styles');
+add_action('admin_enqueue_scripts', 'garp_adding_admin_styles');
 add_action('wp_enqueue_scripts', 'garp_adding_scripts');
 
 /**
