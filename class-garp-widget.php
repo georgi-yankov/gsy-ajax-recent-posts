@@ -29,8 +29,11 @@ if (!class_exists('GARP_Widget')) {
             $title = apply_filters('widget_title', $instance['title']);
 
             $number = (!empty($instance['number']) ) ? absint($instance['number']) : 5;
-            if (!$number)
+            
+            if (!$number) {
                 $number = 5;
+            }
+            
             $this->posts_to_show = $number;
 
             $show_date = isset($instance['show_date']) ? $instance['show_date'] : false;
