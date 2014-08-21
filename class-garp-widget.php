@@ -39,15 +39,17 @@ if (!class_exists('GARP_Widget')) {
             $show_date = isset($instance['show_date']) ? $instance['show_date'] : false;
             $this->show_date = $show_date;
 
-            echo $args['before_widget'];
+            extract($args);
+
+            echo $before_widget;
 
             if (!empty($title)) {
-                echo $args['before_title'] . $title . $args['after_title'];
+                echo $before_title . $title . $after_title;
             }
 
             self::ajax_posts();
 
-            echo $args['after_widget'];
+            echo $after_widget;
         }
 
         /**
