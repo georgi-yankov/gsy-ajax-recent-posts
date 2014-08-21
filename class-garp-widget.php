@@ -13,10 +13,7 @@ if (!class_exists('GARP_Widget')) {
             parent::__construct(
                     'garp_widget', // Base ID
                     __('Ajax Recent Posts', 'gsy-ajax-recent-posts'), // Name
-                    array(
-                'description' => __('Your site’s most recent Posts with Ajax.', 'gsy-ajax-recent-posts'), // description
-                'classname' => 'widget_garp_widget', // CSS ID name
-                    )
+                    array('description' => __('Your site’s most recent Posts with Ajax.', 'gsy-ajax-recent-posts'),) // Args
             );
         }
 
@@ -32,11 +29,11 @@ if (!class_exists('GARP_Widget')) {
             $title = apply_filters('widget_title', $instance['title']);
 
             $number = (!empty($instance['number']) ) ? absint($instance['number']) : 5;
-
+            
             if (!$number) {
                 $number = 5;
             }
-
+            
             $this->posts_to_show = $number;
 
             $show_date = isset($instance['show_date']) ? $instance['show_date'] : false;
