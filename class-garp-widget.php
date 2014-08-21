@@ -55,18 +55,10 @@ if (!class_exists('GARP_Widget')) {
          * @param array $instance Previously saved values from database.
          */
         public function form($instance) {
-            $defaults = array(
-                'title' => '',
-                'number' => 5,
-                'interval' => 5,
-                'show_date' => false
-            );
-            $instance = wp_parse_args((array) $instance, $defaults);
-
-            $title = esc_attr($instance['title']);
-            $number = absint($instance['number']);
-            $interval = absint($instance['interval']);
-            $show_date = (bool) $instance['show_date'];
+            $title = isset($instance['title']) ? esc_attr($instance['title']) : __('New title', 'gsy-ajax-recent-posts');
+            $number = isset($instance['number']) ? absint($instance['number']) : 5;
+            $interval = isset($instance['interval']) ? absint($instance['interval']) : 5;
+            $show_date = isset($instance['show_date']) ? (bool) $instance['show_date'] : false;
             ?>
 
             <p>
