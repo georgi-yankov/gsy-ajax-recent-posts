@@ -1,10 +1,8 @@
 <?php
 
-// If uninstall not called from WordPress exit
-if (!defined('WP_UNINSTALL_PLUGIN')) {
+// If uninstall/delete not called from WordPress then exit
+if (!defined('ABSPATH') && !defined('WP_UNINSTALL_PLUGIN')) {
     exit();
 }
 
-$option_name = 'widget_garp_widget';
-
-delete_option($option_name);
+delete_option('widget_garp_widget');
