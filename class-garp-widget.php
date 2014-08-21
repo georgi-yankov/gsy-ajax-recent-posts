@@ -101,10 +101,10 @@ if (!class_exists('GARP_Widget')) {
          */
         public function update($new_instance, $old_instance) {
             $instance = $old_instance;
-            $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
-            $instance['number'] = (int) $new_instance['number'];
-            $instance['interval'] = (int) $new_instance['interval'];
-            $instance['show_date'] = isset($new_instance['show_date']) ? (bool) $new_instance['show_date'] : false;
+            $instance['title'] = sanitize_text_field($new_instance['title']);
+            $instance['number'] = absint($new_instance['number']);
+            $instance['interval'] = absint($new_instance['interval']);
+            $instance['show_date'] = (bool) $new_instance['show_date'];
 
             return $instance;
         }
