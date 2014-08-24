@@ -3,23 +3,18 @@
 *********************************************/
 .footer-icon, .widget_garp_widget ul li span.post-date {
   background-image: url("img/icons.png");
-  background-repeat: no-repeat;
-}
+  background-repeat: no-repeat; }
 
 .icon-date, .widget_garp_widget ul li span.post-date {
-  background-position: 0 0;
-}
+  background-position: 0 0; }
 
 .widget_garp_widget ul li {
-  text-align: right;
-}
-.widget_garp_widget ul li a {
-  display: block;
-  text-align: left;
-}
-.widget_garp_widget ul li span.post-date {
-  display: inline-block;
-  font-size: 10px;
-  line-height: 10px;
-  padding: 0 0 0 14px;
-}
+  text-align: right; }
+  .widget_garp_widget ul li a {
+    display: block;
+    text-align: left; }
+  .widget_garp_widget ul li span.post-date {
+    display: inline-block;
+    font-size: 10px;
+    line-height: 10px;
+    padding: 0 0 0 14px; }
