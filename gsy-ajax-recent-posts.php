@@ -76,7 +76,7 @@ function garp_adding_styles() {
  * Adding styles for the back-end
  */
 function garp_adding_admin_styles() {
-    $style_src = plugins_url('admin/css/style.css', __FILE__);
+    $style_src = plugins_url('css/admin.css', __FILE__);
     wp_enqueue_style('garp-admin-style', $style_src);
 }
 
