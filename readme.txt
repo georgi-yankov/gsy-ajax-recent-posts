@@ -23,10 +23,10 @@ published posts in certain interval of time, and add them dynamicly.
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Add the newly created widget 'Ajax Recent Posts' in the Widgets area
 1. Click on the added widget and customize it as you wish:
-  1.1. Title
-  1.1. Number of posts to show
-  1.1. Set interval time - check for new published posts every X seconds
-  1.1. Display post date?
+  1. Title
+  1. Number of posts to show
+  1. Set interval time - check for new published posts every X seconds
+  1. Display post date?
 1. The plugin is internationalized and localized for both English and Bulgarian
 
 == Screenshots ==
