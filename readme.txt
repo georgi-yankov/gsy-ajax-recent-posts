@@ -1,5 +1,6 @@
-=== GSY Ajax Recent Posts ===
+﻿=== GSY Ajax Recent Posts ===
 Contributors: georgisyankov
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YTGWCZCRLGBPS
 Tags: gsy, ajax, recent-posts, widget 
 Requires at least: 3.0.1
 Tested up to: 3.9.2
